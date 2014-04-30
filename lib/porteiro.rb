@@ -9,6 +9,16 @@ module Porteiro
   class NotAuthorizedError < StandardError;end
   class PolicyUndefinedError < StandardError;end
 
+  ##
+  # Before action that can be called in the controller to check for authorization.
+  # If this is not called, no policy will be looked up.
+  ## 
+
+  def authorize_user_access!
+    policy = _load_porteiro_policy
+    policy.authorize_action!
+  end
+
 
   module ClassMethods
 
@@ -22,17 +32,6 @@ module Porteiro
 
     def default_policy
       @default_policy ||= "ApplicationPolicy"
-    end
-
-
-    ##
-    # Before action that can be called in the controller to check for authorization.
-    # If this is not called, no policy will be looked up.
-    ## 
-
-    def authorize_user_access!
-      policy = _load_porteiro_policy
-      policy.authorize_action!
     end
 
 
