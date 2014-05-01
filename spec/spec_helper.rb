@@ -5,13 +5,16 @@ require "pry"
 class User < Struct.new(:name); end
 
 class ControllerClass
-  class << self
-    attr_accessor :current_user, :params
-  end
-  self.current_user = User.new
-  self.params = {controller: "document", action: "index"}
-
   include Porteiro 
+
+  def current_user
+    User.new
+  end
+  
+  def params
+    @params ||= {controller: "document", action: "index"}
+  end 
+  
 end
 
 

@@ -18,7 +18,7 @@ describe Porteiro do
   describe "#_find_policy" do 
 
     it "finds the correct policy from controller params" do 
-      klass = ControllerClass._fetch_klass_from_params
+      klass = ControllerClass.new._fetch_klass_from_params
       expect(klass).to eq "Document"
     end
 
@@ -26,8 +26,8 @@ describe Porteiro do
 
       it "instantiates the default policy" do 
         ControllerClass.default_policy = "ApplicationPolicy"
-        klass = ControllerClass._fetch_klass_from_params
-        policy = ControllerClass._find_policy(klass)
+        klass = ControllerClass.new._fetch_klass_from_params
+        policy = ControllerClass.new._find_policy(klass)
         expect(policy).to be_instance_of(ApplicationPolicy)
       end
 
@@ -40,8 +40,8 @@ describe Porteiro do
       end
 
       it "instantiates the correct policy" do 
-        klass = ControllerClass._fetch_klass_from_params
-        policy = ControllerClass._find_policy(klass)
+        klass = ControllerClass.new._fetch_klass_from_params
+        policy = ControllerClass.new._find_policy(klass)
         expect(policy).to be_instance_of(DocumentPolicy)
       end
 
@@ -52,7 +52,7 @@ describe Porteiro do
   describe "#_load_porteiro_policy" do 
 
     it "loads the correct policy" do 
-      policy = ControllerClass._load_porteiro_policy
+      policy = ControllerClass.new._load_porteiro_policy
       expect(policy).to be_instance_of(DocumentPolicy)
     end
 
@@ -63,7 +63,7 @@ describe Porteiro do
     context "when the action is permitted" do 
 
       it "returns true" do 
-        expect(ControllerClass.authorize_user_access!).to be(true)
+        expect(ControllerClass.new.authorize_user_access!).to be(true)
       end
 
     end
@@ -71,8 +71,9 @@ describe Porteiro do
     context "when the action is not permitted" do 
 
       it "raises Porteiro::NotAuthorizedError" do 
-        ControllerClass.params[:action] = "edit"
-        expect {ControllerClass.authorize_user_access!}.to raise_error(Porteiro::NotAuthorizedError)
+        controller = ControllerClass.new
+        controller.params[:action] = "edit"
+        expect {controller.authorize_user_access!}.to raise_error(Porteiro::NotAuthorizedError)
       end
 
     end
