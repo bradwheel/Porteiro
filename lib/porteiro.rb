@@ -58,6 +58,5 @@ module Porteiro
       @default_policy ||= "ApplicationPolicy"
     end
 
-
   end
 end
