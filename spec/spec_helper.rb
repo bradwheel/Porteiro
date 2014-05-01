@@ -7,8 +7,10 @@ class User < Struct.new(:name); end
 class ControllerClass
   include Porteiro 
 
-  def current_user
-    User.new
+  attr_accessor :current_user
+
+  def initialize(user)
+    @current_user = user
   end
   
   def params
@@ -19,7 +21,6 @@ end
 
 
 class ApplicationPolicy < Porteiro::Base
-
 
   def index?
     true
