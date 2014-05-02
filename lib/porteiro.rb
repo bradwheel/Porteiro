@@ -40,7 +40,9 @@ module Porteiro
   ## 
 
   def authorize_user_access!
-    policy.authorize_action!
+    policy_obj = policy 
+    controller_action = policy_obj.params.fetch(:action)
+    policy_obj.send("#{controller_action}?") ? true :  (raise NotAuthorizedError, "You aren't permitted to access this resource")
   end
 
   def policy
