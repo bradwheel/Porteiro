@@ -99,11 +99,6 @@ describe Porteiro do
       expect(policy.params).to eq controller.params
     end
 
-    it "#authorize_action!" do 
-      policy = Porteiro::PolicyFinder.new(controller.current_user, controller.params).find!
-      expect(policy.authorize_action!).to eq true
-    end
-
   end
 
 end
