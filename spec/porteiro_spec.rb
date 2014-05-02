@@ -90,15 +90,4 @@ describe Porteiro do
 
   end
 
-
-  describe Porteiro::Base do 
-
-    it "initializes with a user and request params" do 
-      policy = Porteiro::Base.new(controller.current_user, controller.params)
-      expect(policy.user).to eq controller.current_user
-      expect(policy.params).to eq controller.params
-    end
-
-  end
-
 end

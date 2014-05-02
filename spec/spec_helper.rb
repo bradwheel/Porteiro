@@ -1,5 +1,4 @@
 require "porteiro"
-require "porteiro/base"
 require "pry"
 
 class User < Struct.new(:name); end
@@ -20,7 +19,13 @@ class ControllerClass
 end
 
 
-class ApplicationPolicy < Porteiro::Base
+class ApplicationPolicy
+
+  def initialize(user, params)
+    @user = user 
+    @params = params 
+  end
+  attr_reader :user, :params
 
   def index?
     true

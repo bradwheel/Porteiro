@@ -1,6 +1,5 @@
 require "porteiro/version"
 require "porteiro/policy_finder"
-require "porteiro/base"
 require "active_support/concern"
 require "active_support/inflector"
 
