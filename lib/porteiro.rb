@@ -9,7 +9,7 @@ module Porteiro
 
   class NotAuthorizedError < StandardError;end
   class PolicyUndefinedError < StandardError;end
-
+  class AuthorizationNotPerformedError < StandardError;end
 
   class << self
 
@@ -40,10 +40,15 @@ module Porteiro
   ## 
 
   def authorize_user_access!
+    @_policy_authorized = true
     policy_obj = policy 
     controller_action = policy_obj.params.fetch(:action)
     policy_obj.send("#{controller_action}?") ? true :  (raise NotAuthorizedError, "You aren't permitted to access this resource")
   end
+
+  def verify_authorized
+     raise AuthorizationNotPerformedError unless @_policy_authorized
+   end
 
   def policy
     @policy || Porteiro.policy(porteiro_user, params)
