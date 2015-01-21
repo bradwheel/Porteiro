@@ -1,6 +1,17 @@
 # Porteiro
 
-TODO: Write a gem description
+Porteiro is pundit for controllers. Policies are meant for authorizing requests through controller actions. 
+
+## Features: 
+
+- Supports policy fallback, so you can create a default policy that will be used in the absence of a 
+defined policy. To use this, define a method in your controller called default_policy and add a string with the name
+of the class to be used. E.g..
+
+    def default_policy
+      'ApplicationPolicy'
+    end
+
 
 ## Installation
 
@@ -18,7 +29,6 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
 
 ## Contributing
 

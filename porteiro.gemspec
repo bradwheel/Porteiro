@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Porteiro::VERSION
   spec.authors       = ["bradwheel"]
   spec.email         = ["bradley.m.wheel@gmail.com"]
-  spec.summary       = %q{blah blah}
-  spec.description   = %q{blah blah}
+  spec.summary       = %q{API Authorization for controllers.}
+  spec.description   = %q{Pundit for controllers only.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
